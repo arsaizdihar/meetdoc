@@ -1,0 +1,49 @@
+body {
+  font-family: "Nunito", sans-serif;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1312%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(94%2c 234%2c 212%2c 1)'%3e%3c/rect%3e%3cpath d='M993.513%2c221.764C1030.371%2c224.416%2c1070.101%2c215.02%2c1089.68%2c183.68C1110.206%2c150.825%2c1105.315%2c108.324%2c1084.985%2c75.347C1065.648%2c43.981%2c1030.344%2c28.82%2c993.513%2c27.693C954.252%2c26.491%2c909.948%2c34.599%2c891.8%2c69.434C874.399%2c102.836%2c897.749%2c140.051%2c918.663%2c171.373C936.564%2c198.183%2c961.359%2c219.45%2c993.513%2c221.764' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M403.84 249.67 a127.98 127.98 0 1 0 255.96 0 a127.98 127.98 0 1 0 -255.96 0z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M1156.654781768326 194.31610428172758L1035.2189309052135 273.17746791863334 1114.0802945421194 394.6133187817459 1235.5161454052318 315.7519551448401z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M228.55706145537528 205.60152962645898L159.4019076081915 57.29782361227009 11.098201594002603 126.45297745945389 80.25335544118639 274.7566834736428z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M901.1358741854651 102.81503762496355L1024.6391746419552 87.65073910835396 1009.4748761253456-35.85256134813615 885.9715756688555-20.688262831526558z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M859.0101062632957 485.67827952220705L987.9717910754397 582.8578794204781 1085.1513909737107 453.8961946083341 956.1897061615667 356.7165947100631z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M554.0995866776848 554.2523399668372L662.3646622218383 591.5309950315809 699.643317286582 483.2659194874273 591.3782417424285 445.98726442268367z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M233.61 459.72 a113.76 113.76 0 1 0 227.52 0 a113.76 113.76 0 1 0 -227.52 0z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M168 536.41 a140.59 140.59 0 1 0 281.18 0 a140.59 140.59 0 1 0 -281.18 0z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M816.47 515.12 a173.49 173.49 0 1 0 346.98 0 a173.49 173.49 0 1 0 -346.98 0z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M251.80199407100596 267.2095403353302L253.80298448831493 381.84620456647207 368.43964871945684 379.8452141491631 366.4386583021478 265.2085499180212z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M1350.7200884467352 177.11555551697407L1307.3915967172975 284.3573357748619 1414.6333769751855 327.6858275042995 1457.961868704623 220.4440472464117z' fill='rgba(13%2c 148%2c 136%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1312'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  @apply min-h-screen;
+}
+.input {
+  @apply appearance-none block w-full rounded py-3 px-4 leading-tight outline-none transform hover:-translate-y-1 focus:-translate-y-1 duration-500;
+}
+
+.input-error {
+  @apply border-red-500;
+}
+
+.input-gray {
+  @apply bg-opacity-30 border-none backdrop-filter backdrop-blur-md bg-gray-200 text-gray-700 focus:bg-teal-100 hover:bg-teal-100 focus:ring-teal-500 shadow;
+}
+
+.btn {
+  @apply p-2 rounded font-bold;
+}
+
+.required::after {
+  content: "*";
+  color: red;
+}
+
+.btn-scale {
+  @apply transform hover:scale-110 duration-500;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: all 0.5s;
+  }
+}
+.is-visible {
+  transform: translate3d(0, 0, 0);
+}
