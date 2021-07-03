@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   adminDeleteAppointment,
   adminGetAppointments,
@@ -15,6 +15,8 @@ const AllAppointments = ({ setSelected }) => {
   const { appointments, setAppointments } = useContext(AppointmentContext);
   const [toDelete, setToDelete] = useState(null);
   const [toEdit, setToEdit] = useState(null);
+  const deleteButtonRef = useRef();
+  const closeButtonRef = useRef();
   useEffect(() => {
     adminGetAppointments()
       .then((res) => {
@@ -73,56 +75,64 @@ const AllAppointments = ({ setSelected }) => {
           ))}
         </div>
       </div>
-      <Dialog
-        open={toDelete !== null}
-        onClose={closeModal}
-        className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
-      >
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-        <div className="bg-white rounded-lg p-4 max-w-md z-50 mx-4">
-          <Dialog.Title className="font-bold text-lg mb-2">
-            Are you sure want to delete {toDelete?.doctor_name}'s appointment?
-          </Dialog.Title>
-          <Dialog.Description>
-            This will permanently delete the appointment and all of its
-            registrants data.
-          </Dialog.Description>
-          <div className="flex flex-row-reverse gap-2">
-            <button
-              onClick={closeModal}
-              className="bg-gray-800 text-white p-1 rounded font-bold hover:bg-gray-700"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={deleteAppointment}
-              className="bg-red-500 text-white p-1 rounded font-bold hover:bg-red-400"
-            >
-              Sure
-            </button>
+      {toDelete !== null && (
+        <Dialog
+          open={toDelete !== null}
+          initialFocus={deleteButtonRef}
+          onClose={closeModal}
+          className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
+        >
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+          <div className="bg-white rounded-lg p-4 max-w-md z-50 mx-4">
+            <Dialog.Title className="font-bold text-lg mb-2">
+              Are you sure want to delete {toDelete?.doctor_name}'s appointment?
+            </Dialog.Title>
+            <Dialog.Description>
+              This will permanently delete the appointment and all of its
+              registrants data.
+            </Dialog.Description>
+            <div className="flex flex-row-reverse gap-2">
+              <button
+                onClick={closeModal}
+                className="bg-gray-800 text-white p-1 rounded font-bold hover:bg-gray-700"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={deleteAppointment}
+                ref={deleteButtonRef}
+                className="bg-red-500 text-white p-1 rounded font-bold hover:bg-red-400"
+              >
+                Sure
+              </button>
+            </div>
           </div>
-        </div>
-      </Dialog>
-      <Dialog
-        open={toEdit !== null}
-        onClose={closeModal}
-        className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
-      >
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-        <div className="bg-white rounded-lg p-4 w-full max-w-md z-50 relative mx-4 shadow-lg">
-          <FontAwesomeIcon
-            icon={faTimes}
-            className="absolute top-0 right-0 cursor-pointer m-1.5"
-            color="black"
-            size="lg"
-            onClick={closeModal}
-          ></FontAwesomeIcon>
-          <Dialog.Title className="font-bold text-lg mb-2">
-            Edit Appointment
-          </Dialog.Title>
-          <AppointmentForm isEdit toEdit={toEdit} editCallback={closeModal} />
-        </div>
-      </Dialog>
+        </Dialog>
+      )}
+      {toEdit !== null && (
+        <Dialog
+          open={toEdit !== null}
+          initialFocus={closeButtonRef}
+          onClose={closeModal}
+          className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
+        >
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+          <div className="bg-white rounded-lg p-4 w-full max-w-md z-50 relative mx-4 shadow-lg">
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="absolute top-0 right-0 cursor-pointer m-1.5"
+              color="black"
+              ref={closeButtonRef}
+              size="lg"
+              onClick={closeModal}
+            ></FontAwesomeIcon>
+            <Dialog.Title className="font-bold text-lg mb-2">
+              Edit Appointment
+            </Dialog.Title>
+            <AppointmentForm isEdit toEdit={toEdit} editCallback={closeModal} />
+          </div>
+        </Dialog>
+      )}
     </>
   );
 };

@@ -125,41 +125,43 @@ const Appointment = ({
           </>
         )}
       </Transition>
-      <Dialog
-        open={toInfo !== null}
-        onClose={closeModal}
-        className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
-      >
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-        <div className="bg-white rounded-lg p-4 max-w-md z-50 relative mx-4 shadow-xl">
-          <FontAwesomeIcon
-            icon={faTimes}
-            className="absolute top-0 right-0 cursor-pointer m-1.5"
-            color="black"
-            size="lg"
-            onClick={closeModal}
-          ></FontAwesomeIcon>
-          <Dialog.Title className="font-bold text-lg mb-2 mt-1">
-            {toInfo?.first_name} {toInfo?.last_name}
-          </Dialog.Title>
-          <table class="table-auto">
-            <tr>
-              <td>Email&emsp;</td>: {toInfo?.email}
-            </tr>
-            <tr>
-              <td>Age&emsp;</td>: {toInfo?.age}
-            </tr>
-          </table>
-          <div className="flex justify-end">
-            <button
-              className="bg-red-500 text-xs p-1 font-bold text-white rounded hover:bg-red-400"
+      {toInfo !== null && (
+        <Dialog
+          open={toInfo !== null}
+          onClose={closeModal}
+          className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
+        >
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+          <div className="bg-white rounded-lg p-4 max-w-md z-50 relative mx-4 shadow-xl">
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="absolute top-0 right-0 cursor-pointer m-1.5"
+              color="black"
+              size="lg"
               onClick={closeModal}
-            >
-              CLOSE
-            </button>
+            ></FontAwesomeIcon>
+            <Dialog.Title className="font-bold text-lg mb-2 mt-1">
+              {toInfo?.first_name} {toInfo?.last_name}
+            </Dialog.Title>
+            <table className="table-auto">
+              <tr>
+                <td>Email&emsp;</td>: {toInfo?.email}
+              </tr>
+              <tr>
+                <td>Age&emsp;</td>: {toInfo?.age}
+              </tr>
+            </table>
+            <div className="flex justify-end">
+              <button
+                className="bg-red-500 text-xs p-1 font-bold text-white rounded hover:bg-red-400"
+                onClick={closeModal}
+              >
+                CLOSE
+              </button>
+            </div>
           </div>
-        </div>
-      </Dialog>
+        </Dialog>
+      )}
     </>
   );
 };

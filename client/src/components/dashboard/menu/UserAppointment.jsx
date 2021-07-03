@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cancelAppointment, getAppointments } from "../../../utils/api";
 import Appointment from "../Appointment";
 import { Dialog } from "@headlessui/react";
@@ -6,6 +6,7 @@ import { Dialog } from "@headlessui/react";
 const UserAppointment = () => {
   const [appointments, setAppointments] = useState([]);
   const [toCancel, setToCancel] = useState(null);
+  const okButtonRef = useRef();
   useEffect(() => {
     getAppointments().then((res) =>
       setAppointments(res.data.map((app) => ({ ...app, show: true })))
@@ -14,6 +15,7 @@ const UserAppointment = () => {
 
   const cancelCallback = (id) => {
     const appointment = appointments.find((app) => app.id === id);
+    console.log(appointment);
     if (appointment) setToCancel(appointment);
   };
 
@@ -45,35 +47,39 @@ const UserAppointment = () => {
             cancelCallback={cancelCallback}
           />
         ))}
+        {toCancel !== null && (
+          <Dialog
+            open={toCancel !== null}
+            initialFocus={okButtonRef}
+            onClose={closeModal}
+            className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
+          >
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+            <div className="bg-white rounded-lg p-4 max-w-md z-50 mx-4">
+              <Dialog.Title className="font-bold text-lg mb-2">
+                Are you sure want to cancel appointment with{" "}
+                {toCancel?.doctor_name}?
+              </Dialog.Title>
+              <Dialog.Description>{toCancel?.description}</Dialog.Description>
+              <div className="flex flex-row-reverse gap-2">
+                <button
+                  onClick={closeModal}
+                  className="bg-gray-800 text-white p-1 rounded font-bold hover:bg-gray-700"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleCancelAppointment}
+                  ref={okButtonRef}
+                  className="bg-red-500 text-white p-1 rounded font-bold hover:bg-red-400"
+                >
+                  Sure
+                </button>
+              </div>
+            </div>
+          </Dialog>
+        )}
       </div>
-      <Dialog
-        open={toCancel !== null}
-        onClose={closeModal}
-        className="top-0 left-0 right-0 bottom-0 fixed z-50 flex justify-center items-center"
-      >
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-        <div className="bg-white rounded-lg p-4 max-w-md z-50 mx-4">
-          <Dialog.Title className="font-bold text-lg mb-2">
-            Are you sure want to cancel appointment with {toCancel?.doctor_name}
-            ?
-          </Dialog.Title>
-          <Dialog.Description>{toCancel?.description}</Dialog.Description>
-          <div className="flex flex-row-reverse gap-2">
-            <button
-              onClick={closeModal}
-              className="bg-gray-800 text-white p-1 rounded font-bold hover:bg-gray-700"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleCancelAppointment}
-              className="bg-red-500 text-white p-1 rounded font-bold hover:bg-red-400"
-            >
-              Sure
-            </button>
-          </div>
-        </div>
-      </Dialog>
     </div>
   );
 };
